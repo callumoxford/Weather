@@ -13,15 +13,16 @@ public class CacheTest {
         TemperatureRetriever delegate = mock(TemperatureRetriever.class);
         TemperatureRetriever cache = new TemperatureCache(delegate);
         when(delegate.getTemperature(any(String.class), any(String.class))).thenReturn(2.0);
-        assertThat(cache.getTemperature("LONDON","MONDAY"), equalTo(2.0));
+        assertThat(cache.getTemperature("LONDON", "MONDAY"), equalTo(2.0));
     }
+
     @Test
     public void cacheHit() throws Exception {
         TemperatureRetriever delegate = mock(TemperatureRetriever.class);
         TemperatureRetriever cache = new TemperatureCache(delegate);
         when(delegate.getTemperature(any(String.class), any(String.class))).thenReturn(2.0);
-        cache.getTemperature("LONDON","MONDAY");
-        cache.getTemperature("LONDON","MONDAY");
-        verify(delegate,times(1)).getTemperature(any(String.class), any(String.class));
+        cache.getTemperature("LONDON", "MONDAY");
+        cache.getTemperature("LONDON", "MONDAY");
+        verify(delegate, times(1)).getTemperature(any(String.class), any(String.class));
     }
 }
